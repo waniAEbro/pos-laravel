@@ -92,4 +92,26 @@
             </table>
         </div>
     </div>
+    <x-slot:script>
+        <script>
+            function convertRupiah(angka) {
+                let rupiah = '';
+                let angkarev = angka.toString().split('').reverse().join('');
+                for (var i = 0; i < angkarev.length; i++)
+                    if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + '.';
+                return 'Rp. ' + rupiah.split('', rupiah.length - 1).reverse().join('') + ',-';
+            }
+
+            let tr = document.querySelectorAll('tbody tr');
+
+            tr.forEach(tr => {
+                tr.querySelector("td:nth-child(4)").innerHTML = convertRupiah(tr.querySelector("td:nth-child(4)")
+                    .innerHTML);
+                tr.querySelector("td:nth-child(5)").innerHTML = convertRupiah(tr.querySelector("td:nth-child(5)")
+                    .innerHTML);
+                tr.querySelector("td:nth-child(6)").innerHTML = convertRupiah(tr.querySelector("td:nth-child(6)")
+                    .innerHTML);
+            })
+        </script>
+    </x-slot:script>
 </x-layout>

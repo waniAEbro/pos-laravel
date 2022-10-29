@@ -45,7 +45,24 @@ class DebitController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+
+        $sync = [];
+        foreach ($request->transaksi["products"] as $product) {
+            $sync[$product["id"]] = ["jumlah" => $product["jumlah"], "harga" => $product["harga"]];
+        }
+
+        $debit = Debit::create([
+            "total_harga" => $request->transaksi["total_harga"],
+            "total_barang" => $request->transaksi["total_barang"],
+            "terbayar" => $request->transaksi["terbayar"],
+            "kekurangan" => $request->transaksi["kekurangan"],
+            "reseller_id" => $request->transaksi["reseller_id"],
+            "user_id" => $request->transaksi["user_id"],
+        ]);
+
+        $debit->products()->sync($sync);
+
+        return response()->json($debit, 200);
     }
 
     /**

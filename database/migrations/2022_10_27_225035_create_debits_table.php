@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('debits', function (Blueprint $table) {
             $table->id();
-            $table->date("tanggal");
             $table->integer("total_harga")->default("0");
             $table->integer("total_barang")->default("0");
             $table->integer("terbayar")->default("0");

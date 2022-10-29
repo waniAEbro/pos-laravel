@@ -29,8 +29,8 @@
                             <td>{{ $debit->reseller_id ? $debit->reseller->nama : 'Pembeli Biasa' }}</td>
                             <td>{{ $debit->user->name }}</td>
                             <td>
-                                @foreach ($debit->products->nama as $index => $nama)
-                                    {{ $nama . ($index != $debit->products->count() - 1) ? ', ' : '' }}
+                                @foreach ($debit->products as $index => $product)
+                                    {{ $index < $debit->products->count() - 1 ? $product->nama . ', ' : $product->nama }}
                                 @endforeach
                             </td>
                             <td>{{ $debit->total_barang }}</td>
@@ -38,8 +38,7 @@
                             <td>{{ $debit->terbayar }}</td>
                             <td>{{ $debit->kekurangan }}</td>
                             <td class="d-flex">
-                                <a href="/categories/{{ $category->id }}/edit"
-                                    class="btn btn-outline-warning me-2">Edit</a>
+                                <a href="/debits/{{ $debit->id }}/edit" class="btn btn-outline-warning me-2">Edit</a>
                             </td>
                         </tr>
                     @endforeach
@@ -47,4 +46,26 @@
             </table>
         </div>
     </div>
+    <x-slot:script>
+        <script>
+            function convertRupiah(angka) {
+                let rupiah = '';
+                let angkarev = angka.toString().split('').reverse().join('');
+                for (var i = 0; i < angkarev.length; i++)
+                    if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + '.';
+                return 'Rp. ' + rupiah.split('', rupiah.length - 1).reverse().join('') + ',-';
+            }
+
+            let tr = document.querySelectorAll('tbody tr');
+
+            tr.forEach(tr => {
+                tr.querySelector("td:nth-child(6)").innerHTML = convertRupiah(tr.querySelector("td:nth-child(6)")
+                    .innerHTML);
+                tr.querySelector("td:nth-child(7)").innerHTML = convertRupiah(tr.querySelector("td:nth-child(7)")
+                    .innerHTML);
+                tr.querySelector("td:nth-child(8)").innerHTML = convertRupiah(tr.querySelector("td:nth-child(8)")
+                    .innerHTML);
+            })
+        </script>
+    </x-slot:script>
 </x-layout>

@@ -110,13 +110,14 @@
     <x-slot:script>
         <script>
             let transaksi = {};
-            let reseller = harga = product = max = kecil = total = undefined;
+            let reseller = harga = product = max = kecil = total = id = undefined;
             let kembalian = document.getElementById("kembalian");
             let kekurangan = document.getElementById("kekurangan");
             const products = @json($products);
 
             transaksi.reseller_id = null;
             transaksi.products = [];
+            transaksi.user_id = {{ auth()->user()->id }};
 
             $("#reseller").on("change", () => {
                 reseller = $("#reseller").val();
@@ -154,14 +155,17 @@
             })
 
             function convertRupiah(angka) {
-                var rupiah = '';
-                var angkarev = angka.toString().split('').reverse().join('');
+                let rupiah = '';
+                let angkarev = angka.toString().split('').reverse().join('');
                 for (var i = 0; i < angkarev.length; i++)
                     if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + '.';
                 return 'Rp. ' + rupiah.split('', rupiah.length - 1).reverse().join('') + ',-';
             }
 
             function updateTable(element) {
+                id = transaksi.products.map(product => product.id).indexOf(parseInt(element.parentElement.previousElementSibling
+                    .previousElementSibling.innerHTML));
+
                 if (parseInt(element.value) > parseInt(element.getAttribute("max"))) {
                     window.alert("stok produk / stok material tidak mencukupi");
                     element.value = element.getAttribute("max");
@@ -174,6 +178,8 @@
 
                 element.parentElement.nextElementSibling.innerHTML = convertRupiah(harga);
                 element.parentElement.nextElementSibling.setAttribute("harga", harga);
+                transaksi.products[id].harga = harga;
+                transaksi.products[id].jumlah = parseInt(element.value);
 
                 total = 0;
 
@@ -183,6 +189,7 @@
 
                 document.querySelector("#total_harga").value = convertRupiah(total);
                 document.querySelector("#total_harga").setAttribute("harga", total);
+                transaksi.total_harga = total;
 
                 total = 0;
 
@@ -191,6 +198,7 @@
                 });
 
                 document.querySelector("#total_barang").value = total;
+                transaksi.total_barang = total;
             }
 
             function updateDetailTransaksi(element) {
@@ -202,14 +210,34 @@
                         kembalian.value = convertRupiah(0);
                         kekurangan.setAttribute("kekurangan", 0);
                         kekurangan.value = convertRupiah(-total);
+                        transaksi.kekurangan = -total;
+                        transaksi.terbayar = parseInt(element.value);
                     } else {
                         kekurangan.setAttribute("kekurangan", 0);
                         kekurangan.value = convertRupiah(0);
+                        transaksi.kekurangan = 0;
                         kembalian.setAttribute("kembalian", 0);
                         kembalian.value = convertRupiah(total);
-
+                        transaksi.terbayar = parseInt(parseInt(harga));
                     }
                 }
+            }
+
+            function submitForm() {
+                $.ajax({
+                    url: "/debits",
+                    type: "post",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        transaksi: transaksi
+                    },
+                    success: function(response) {
+                        window.location.href = "/debits";
+                    },
+                    error: function(response) {
+                        console.log(response);
+                    }
+                })
             }
         </script>
     </x-slot:script>
