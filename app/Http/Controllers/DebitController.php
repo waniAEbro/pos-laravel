@@ -52,6 +52,15 @@ class DebitController extends Controller
         $sync = [];
         foreach ($request->transaksi["products"] as $product) {
             $sync[$product["id"]] = ["jumlah" => $product["jumlah"], "harga" => $product["harga"]];
+            $produk = Product::find($product["id"]);
+            $produk->update([
+                "stok" => $produk->stok - $product["jumlah"]
+            ]);
+            foreach ($produk->materials as $material) {
+                $material->update([
+                    "stok" => $material->stok - ($product["jumlah"] * $material->pivot->jumlah)
+                ]);
+            }
         }
 
         $debit = Debit::create([

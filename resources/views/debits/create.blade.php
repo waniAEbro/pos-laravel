@@ -220,7 +220,7 @@
                 }
             }
 
-            function submitForm() {
+            function submit() {
                 $.ajax({
                     url: "/debits",
                     type: "post",
@@ -235,6 +235,18 @@
                         console.log(response);
                     }
                 })
+            }
+
+            function submitForm() {
+                if (transaksi.kekurangan > 0 && transaksi.reseller_id == null) {
+                    window.alert("Uang yang diayarkan pelanggan tidak cukup");
+                } else if (transaksi.kekurangan > 0 && transaksi.reseller_id) {
+                    if (confirm("Uang yang diayarkan pelanggan tidak cukup, apakah anda yakin ingin melanjutkan transaksi?")) {
+                        submit();
+                    }
+                } else {
+                    submit();
+                }
             }
         </script>
     </x-slot:script>
