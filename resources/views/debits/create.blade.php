@@ -3,6 +3,8 @@
     <x-slot:breadcrumb>
         <li class="breadcrumb-item">Transaksi</li>
     </x-slot:breadcrumb>
+    <x-slot:saldo>{{ $saldo->saldo_tunai }}</x-slot:saldo>
+    <x-slot:total_saldo>{{ $saldo->total_saldo }}</x-slot:total_saldo>
 
     <div class="card">
         <div class="card-body">
@@ -157,14 +159,6 @@
                 $("#product").val("");
                 $("#reseller").attr("disabled", true);
             })
-
-            function convertRupiah(angka) {
-                let rupiah = '';
-                let angkarev = angka.toString().split('').reverse().join('');
-                for (var i = 0; i < angkarev.length; i++)
-                    if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + '.';
-                return 'Rp. ' + rupiah.split('', rupiah.length - 1).reverse().join('') + ',-';
-            }
 
             function updateTable(element) {
                 id = transaksi.products.map(product => product.id).indexOf(parseInt(element.parentElement.parentElement

@@ -3,6 +3,9 @@
     <x-slot:breadcrumb>
         <li class="breadcrumb-item">Materials</li>
     </x-slot:breadcrumb>
+    <x-slot:saldo>{{ $saldo->saldo_tunai }}</x-slot:saldo>
+    <x-slot:total_saldo>{{ $saldo->total_saldo }}</x-slot:total_saldo>
+
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <p>Materials List</p>

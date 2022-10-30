@@ -49,6 +49,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js"
         integrity="sha512-CX7sDOp7UTAq+i1FYIlf9Uo27x4os+kGeoT7rgwvY+4dmjqV0IuE/Bl5hVsjnQPQiTOhAX1O2r2j5bjsFBvv/A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        function convertRupiah(angka) {
+            let rupiah = '';
+            let angkarev = angka.toString().split('').reverse().join('');
+            for (var i = 0; i < angkarev.length; i++)
+                if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + '.';
+            return 'Rp. ' + rupiah.split('', rupiah.length - 1).reverse().join('') + ',-';
+        }
+
+        document.querySelectorAll(".saldo").forEach(saldo => saldo.innerHTML = "Saldo : " + convertRupiah(parseInt(
+            {{ $saldo }})));
+        document.querySelector(".total_saldo").innerHTML = "Total Saldo : " + convertRupiah(parseInt({{ $total_saldo }}));
+    </script>
     {{ $script ?? '' }}
 </body>
 

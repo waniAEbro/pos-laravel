@@ -4,6 +4,8 @@
         <li class="breadcrumb-item"><a href="/categories">Categories</a></li>
         <li class="breadcrumb-item">Edit Category</li>
     </x-slot:breadcrumb>
+    <x-slot:saldo>{{ $saldo->saldo_tunai }}</x-slot:saldo>
+    <x-slot:total_saldo>{{ $saldo->total_saldo }}</x-slot:total_saldo>
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">Form Edit Category</h4>

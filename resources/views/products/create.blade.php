@@ -4,6 +4,9 @@
         <li class="breadcrumb-item"><a href="/products">Products</a></li>
         <li class="breadcrumb-item">Create Product</li>
     </x-slot:breadcrumb>
+    <x-slot:saldo>{{ $saldo->saldo_tunai }}</x-slot:saldo>
+    <x-slot:total_saldo>{{ $saldo->total_saldo }}</x-slot:total_saldo>
+
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">Form Create Product</h4>

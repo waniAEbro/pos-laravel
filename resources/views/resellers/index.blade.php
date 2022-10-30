@@ -3,6 +3,9 @@
     <x-slot:breadcrumb>
         <li class="breadcrumb-item">Resellers</li>
     </x-slot:breadcrumb>
+    <x-slot:saldo>{{ $saldo->saldo_tunai }}</x-slot:saldo>
+    <x-slot:total_saldo>{{ $saldo->total_saldo }}</x-slot:total_saldo>
+
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <p>Resellers List</p>
@@ -25,9 +28,10 @@
                             <td>{{ $reseller->alamat }}</td>
                             <td>{{ $reseller->nomor }}</td>
                             <td class="d-flex">
-                                <a href="/resellers/{{ $reseller->id }}/edit" class="btn btn-outline-warning">Edit</a>
+                                <a href="/resellers/{{ $reseller->id }}/edit"
+                                    class="btn btn-outline-warning me-2">Edit</a>
 
-                                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-outline-danger me-2" data-bs-toggle="modal"
                                     data-bs-target="#danger{{ $reseller->id }}">
                                     Delete
                                 </button>

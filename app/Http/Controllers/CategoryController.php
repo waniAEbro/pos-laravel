@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Saldo;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,7 +18,8 @@ class CategoryController extends Controller
     {
         return view("categories.index", [
             "categories" => Category::get(),
-            "title" => "Categories"
+            "title" => "Categories",
+            "saldo" => Saldo::find(1)
         ]);
     }
 
@@ -29,7 +31,8 @@ class CategoryController extends Controller
     public function create()
     {
         return view("categories.create", [
-            "title" => "Categories"
+            "title" => "Categories",
+            "saldo" => Saldo::find(1)
         ]);
     }
 
@@ -73,7 +76,8 @@ class CategoryController extends Controller
     {
         return view("categories.edit", [
             "category" => $category,
-            "title" => "Categories"
+            "title" => "Categories",
+            "saldo" => Saldo::find(1)
         ]);
     }
 

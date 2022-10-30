@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Saldo;
 use App\Models\Material;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,6 +19,7 @@ class MaterialController extends Controller
         return view("materials.index", [
             "title" => "Materials",
             "materials" => Material::get(),
+            "saldo" => Saldo::find(1)
         ]);
     }
 
@@ -29,7 +31,8 @@ class MaterialController extends Controller
     public function create()
     {
         return view("materials.create", [
-            "title" => "Materials"
+            "title" => "Materials",
+            "saldo" => Saldo::find(1)
         ]);
     }
 
@@ -72,6 +75,7 @@ class MaterialController extends Controller
         return view("materials.edit", [
             "title" => "Materials",
             "material" => $material,
+            "saldo" => Saldo::find(1)
         ]);
     }
 

@@ -2,6 +2,8 @@
     <x-slot:title>{{ $title }}</x-slot:title>
     <x-slot:breadcrumb>
     </x-slot:breadcrumb>
+    <x-slot:saldo>{{ $saldo->saldo_tunai }}</x-slot:saldo>
+    <x-slot:total_saldo>{{ $saldo->total_saldo }}</x-slot:total_saldo>
     <div class="row">
         <div class="col-lg-6">
             <div class="card">

@@ -36,6 +36,7 @@ class DebitController extends Controller
             "title" => "Transactions",
             "products" => Product::get(),
             "resellers" => Reseller::get(),
+            "saldo" => Saldo::find(1)
         ]);
     }
 
