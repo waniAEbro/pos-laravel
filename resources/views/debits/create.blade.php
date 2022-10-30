@@ -27,7 +27,9 @@
                         <select name="product" id="product" class="form-select">
                             <option value="" disabled hidden selected>Pilih Produk</option>
                             @foreach ($products as $product)
-                                <option value="{{ $product->id }}">{{ $product->id . ' - ' . $product->nama }}</option>
+                                <option value="{{ $product->id }}">
+                                    {{ $product->id . ' - ' . $product->nama . ' - ' . $product->category->nama }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -45,6 +47,7 @@
                 <thead>
                     <tr>
                         <th>ID Barang</th>
+                        <th>Kategori</th>
                         <th>Nama Barang</th>
                         <th>Jumlah</th>
                         <th>Harga</th>
@@ -142,6 +145,7 @@
                 $("#table2 tbody").append(`
                     <tr>
                         <td>${product.id}</td>
+                        <td>${product.category.nama}</td>
                         <td>${product.nama}</td>
                         <td>
                             <input type="number" oninput="updateTable(this)" class="form-control jumlah" value="0" min="0" max="${kecil}" harga=${harga}>
@@ -163,9 +167,8 @@
             }
 
             function updateTable(element) {
-                id = transaksi.products.map(product => product.id).indexOf(parseInt(element.parentElement.previousElementSibling
-                    .previousElementSibling.innerHTML));
-
+                id = transaksi.products.map(product => product.id).indexOf(parseInt(element.parentElement.parentElement
+                    .children[0].innerHTML));
                 if (parseInt(element.value) > parseInt(element.getAttribute("max"))) {
                     window.alert("stok produk / stok material tidak mencukupi");
                     element.value = element.getAttribute("max");
@@ -232,7 +235,7 @@
                         transaksi: transaksi
                     },
                     success: function(response) {
-                        window.location.href = "/debits";
+                        window.location.href = "/debits/create";
                     },
                     error: function(response) {
                         console.log(response);

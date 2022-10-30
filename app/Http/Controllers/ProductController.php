@@ -112,7 +112,6 @@ class ProductController extends Controller
             "category_id" => $request->category,
             "harga" => $request->harga,
             "harga_reseller" => $request->harga_reseller,
-            "stok" => $request->stok,
             "biaya_produksi" => $request->biaya_produksi
         ]);
 

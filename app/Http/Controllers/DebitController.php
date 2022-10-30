@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Debit;
+use App\Models\Saldo;
 use App\Models\Product;
 use App\Models\Reseller;
 use Illuminate\Http\Request;
@@ -19,7 +20,8 @@ class DebitController extends Controller
     {
         return view("debits.index", [
             "title" => "Debits",
-            "debits" => Debit::get()
+            "debits" => Debit::get(),
+            "saldo" => Saldo::find(1)
         ]);
     }
 
@@ -60,6 +62,13 @@ class DebitController extends Controller
             "user_id" => $request->transaksi["user_id"],
         ]);
 
+        $saldo = Saldo::find(1);
+
+        $saldo->update([
+            "saldo_tunai" => intval($saldo->saldo_tunai) + intval($debit->terbayar),
+            "total_saldo" => intval($saldo->total_saldo) + intval($debit->total_harga)
+        ]);
+
         $debit->products()->sync($sync);
 
         return response()->json($debit, 200);
@@ -73,7 +82,10 @@ class DebitController extends Controller
      */
     public function show(Debit $debit)
     {
-        //
+        return view("debits.show", [
+            "title" => "Debits",
+            "debit" => $debit
+        ]);
     }
 
     /**

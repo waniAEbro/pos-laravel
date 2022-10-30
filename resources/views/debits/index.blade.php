@@ -3,6 +3,31 @@
     <x-slot:breadcrumb>
         <li class="breadcrumb-item">Penjualan</li>
     </x-slot:breadcrumb>
+
+    <div class="card">
+        <div class="card-header">
+            <p>
+                Detail Saldo
+            </p>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <h6>Saldo</h6>
+                </div>
+                <div class="col-md-8">
+                    <p id="saldo_tunai">{{ $saldo->saldo_tunai }}</p>
+                </div>
+                <div class="col-md-4">
+                    <h6>Total Saldo <small>(termasuk piutang / kekurangan)</small></h6>
+                </div>
+                <div class="col-md-8">
+                    <p id="total_saldo">{{ $saldo->total_saldo }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card">
         <div class="card-header">
             <p>List Penjualan</p>
@@ -26,7 +51,7 @@
                     @foreach ($debits as $debit)
                         <tr>
                             <td>{{ $debit->created_at->format('j F Y') }}</td>
-                            <td>{{ $debit->reseller_id ? $debit->reseller->nama : 'Pembeli Biasa' }}</td>
+                            <td>{{ $debit->reseller_id ? $debit->reseller->nama : 'Pelanggan Biasa' }}</td>
                             <td>{{ $debit->user->name }}</td>
                             <td>
                                 @foreach ($debit->products as $index => $product)
@@ -38,7 +63,9 @@
                             <td>{{ $debit->terbayar }}</td>
                             <td>{{ $debit->kekurangan }}</td>
                             <td class="d-flex">
-                                <a href="/debits/{{ $debit->id }}/edit" class="btn btn-outline-warning me-2">Edit</a>
+                                <a href="/debits/{{ $debit->id }}/edit"
+                                    class="btn btn-outline-warning me-2">Edit</a>
+                                <a href="/debits/{{ $debit->id }}" class="btn btn-outline-primary me-2">Detail</a>
                             </td>
                         </tr>
                     @endforeach
@@ -59,13 +86,20 @@
             let tr = document.querySelectorAll('tbody tr');
 
             tr.forEach(tr => {
-                tr.querySelector("td:nth-child(6)").innerHTML = convertRupiah(tr.querySelector("td:nth-child(6)")
-                    .innerHTML);
-                tr.querySelector("td:nth-child(7)").innerHTML = convertRupiah(tr.querySelector("td:nth-child(7)")
-                    .innerHTML);
-                tr.querySelector("td:nth-child(8)").innerHTML = convertRupiah(tr.querySelector("td:nth-child(8)")
-                    .innerHTML);
-            })
+                if (tr.children[0].getAttribute("class") != "dataTables-empty") {
+                    tr.querySelector("td:nth-child(6)").innerHTML = convertRupiah(tr.querySelector("td:nth-child(6)")
+                        .innerHTML);
+                    tr.querySelector("td:nth-child(7)").innerHTML = convertRupiah(tr.querySelector("td:nth-child(7)")
+                        .innerHTML);
+                    tr.querySelector("td:nth-child(8)").innerHTML = convertRupiah(tr.querySelector("td:nth-child(8)")
+                        .innerHTML);
+                }
+            });
+
+            document.querySelector('#total_saldo').innerHTML = convertRupiah(document.querySelector('#total_saldo')
+                .innerHTML);
+            document.querySelector('#saldo_tunai').innerHTML = convertRupiah(document.querySelector('#saldo_tunai')
+                .innerHTML);
         </script>
     </x-slot:script>
 </x-layout>

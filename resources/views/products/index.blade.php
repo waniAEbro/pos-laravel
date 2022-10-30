@@ -105,12 +105,14 @@
             let tr = document.querySelectorAll('tbody tr');
 
             tr.forEach(tr => {
-                tr.querySelector("td:nth-child(4)").innerHTML = convertRupiah(tr.querySelector("td:nth-child(4)")
-                    .innerHTML);
-                tr.querySelector("td:nth-child(5)").innerHTML = convertRupiah(tr.querySelector("td:nth-child(5)")
-                    .innerHTML);
-                tr.querySelector("td:nth-child(6)").innerHTML = convertRupiah(tr.querySelector("td:nth-child(6)")
-                    .innerHTML);
+                if (tr.children[0].getAttribute("class") != "dataTables-empty") {
+                    tr.querySelector("td:nth-child(4)").innerHTML = convertRupiah(tr.querySelector("td:nth-child(4)")
+                        .innerHTML);
+                    tr.querySelector("td:nth-child(5)").innerHTML = convertRupiah(tr.querySelector("td:nth-child(5)")
+                        .innerHTML);
+                    tr.querySelector("td:nth-child(6)").innerHTML = convertRupiah(tr.querySelector("td:nth-child(6)")
+                        .innerHTML);
+                }
             })
         </script>
     </x-slot:script>

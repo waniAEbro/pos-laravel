@@ -66,7 +66,7 @@
                             </div>
                             <div class="col-md-8 form-group">
                                 <input type="number" id="stok" min="0" class="form-control" name="stok"
-                                    value="{{ $product->stok }}" required>
+                                    value="{{ $product->stok }}" disabled>
                             </div>
 
                             <div class="col form-group">

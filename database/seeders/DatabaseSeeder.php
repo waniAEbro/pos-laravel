@@ -20,5 +20,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        \App\Models\Saldo::create([
+            "total_saldo" => 0,
+            "saldo_tunai" => 0
+        ]);
     }
 }
