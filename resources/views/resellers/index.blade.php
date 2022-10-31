@@ -3,8 +3,7 @@
     <x-slot:breadcrumb>
         <li class="breadcrumb-item">Resellers</li>
     </x-slot:breadcrumb>
-    <x-slot:saldo>{{ $saldo->saldo_tunai }}</x-slot:saldo>
-    <x-slot:total_saldo>{{ $saldo->total_saldo }}</x-slot:total_saldo>
+    <x-slot:saldo>{{ $saldo[0]->saldo }}</x-slot:saldo>
 
     <div class="card">
         <div class="card-header d-flex justify-content-between">

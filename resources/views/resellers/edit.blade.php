@@ -4,8 +4,7 @@
         <li class="breadcrumb-item"><a href="/resellers">Resellers</a></li>
         <li class="breadcrumb-item">Edit Reseller</li>
     </x-slot:breadcrumb>
-    <x-slot:saldo>{{ $saldo->saldo_tunai }}</x-slot:saldo>
-    <x-slot:total_saldo>{{ $saldo->total_saldo }}</x-slot:total_saldo>
+    <x-slot:saldo>{{ $saldo[0]->saldo }}</x-slot:saldo>
 
     <div class="card">
         <div class="card-header">

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Saldo;
+use App\Models\Account;
 use App\Models\Product;
 use App\Models\Reseller;
 use Illuminate\Http\Request;
@@ -31,7 +31,8 @@ class HomeController extends Controller
             "title" => "Dashboard",
             "jumlah_reseller" => Reseller::count(),
             "jumlah_produk" => Product::count(),
-            "saldo" => Saldo::find(1)
+            "saldo" => Account::latest()->limit(1)->get(),
+            "products" => Product::orderBy("terjual", "desc")->limit(5)->get(),
         ]);
     }
 }

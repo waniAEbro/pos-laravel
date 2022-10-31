@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('saldos', function (Blueprint $table) {
+        Schema::create('product_sell', function (Blueprint $table) {
             $table->id();
-            $table->integer("saldo_tunai")->default("0");
-            $table->integer("total_saldo")->default("0");
+            $table->foreignId("product_id")->constrained("products");
+            $table->integer("harga");
+            $table->integer("jumlah");
+            $table->foreignId("sell_id")->constrained("sells");
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('saldos');
+        Schema::dropIfExists('product_sells');
     }
 };

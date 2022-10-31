@@ -39,9 +39,6 @@
                             <p class="dropdown-item saldo"></p>
                         </li>
                         <li>
-                            <p class="dropdown-item total_saldo"></p>
-                        </li>
-                        <li>
                             <hr class="dropdown-divider" />
                         </li>
                         <li>

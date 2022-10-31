@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer("harga_reseller")->default("0");
             $table->integer("biaya_produksi")->default("0");
             $table->integer("stok")->default("0");
+            $table->integer("terjual")->default("0");
             $table->softDeletes();
             $table->timestamps();
         });

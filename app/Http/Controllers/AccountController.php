@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Credit;
+use App\Models\Account;
 use Illuminate\Http\Request;
 
-class CreditController extends Controller
+class AccountController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class CreditController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Credit  $credit
+     * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function show(Credit $credit)
+    public function show(Account $account)
     {
         //
     }
@@ -52,10 +52,10 @@ class CreditController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Credit  $credit
+     * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function edit(Credit $credit)
+    public function edit(Account $account)
     {
         //
     }
@@ -64,10 +64,10 @@ class CreditController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Credit  $credit
+     * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Credit $credit)
+    public function update(Request $request, Account $account)
     {
         //
     }
@@ -75,10 +75,10 @@ class CreditController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Credit  $credit
+     * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Credit $credit)
+    public function destroy(Account $account)
     {
         //
     }

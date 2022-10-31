@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Saldo;
+use App\Models\Account;
 use App\Models\Reseller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,7 +19,7 @@ class ResellerController extends Controller
         return view("resellers.index", [
             "title" => "Resellers",
             "resellers" => Reseller::get(),
-            "saldo" => Saldo::find(1)
+            "saldo" => Account::latest()->limit(1)->get()
         ]);
     }
 
@@ -32,7 +32,7 @@ class ResellerController extends Controller
     {
         return view("resellers.create", [
             "title" => "Resellers",
-            "saldo" => Saldo::find(1)
+            "saldo" => Account::latest()->limit(1)->get()
         ]);
     }
 
@@ -75,7 +75,7 @@ class ResellerController extends Controller
         return view("resellers.edit", [
             "title" => "Resellers",
             "reseller" => $reseller,
-            "saldo" => Saldo::find(1)
+            "saldo" => Account::latest()->limit(1)->get()
         ]);
     }
 

@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\DebitController;
+use App\Http\Controllers\SellController;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MaterialController;
@@ -31,7 +32,9 @@ Route::middleware("auth")->group(function () {
 
     Route::resource("materials", MaterialController::class);
 
-    Route::resource("debits", DebitController::class);
+    Route::resource("sells", SellController::class);
+
+    Route::resource("accounts", AccountController::class);
 });
 
 Auth::routes();

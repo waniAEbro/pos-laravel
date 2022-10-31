@@ -16,14 +16,17 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
 
-        \App\Models\Saldo::create([
-            "total_saldo" => 0,
-            "saldo_tunai" => 0
+        \App\Models\Account::create([
+            'saldo' => 0,
+            "kredit" => 0,
+            "debit" => 0,
+            "keterangan" => "Inisiasi",
+            "tanggal" => date("Y-m-d"),
         ]);
     }
 }

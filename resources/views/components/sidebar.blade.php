@@ -83,15 +83,15 @@
 
                 <li class="sidebar-title">Debit</li>
 
-                <li class="sidebar-item {{ $slot == 'Debits' ? 'active' : '' }}">
-                    <a href="/debits" class='sidebar-link'>
+                <li class="sidebar-item {{ $slot == 'Sells' ? 'active' : '' }}">
+                    <a href="/sells" class='sidebar-link'>
                         <i class="bi bi-currency-exchange"></i>
                         <span>Penjualan</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item {{ $slot == 'Transaction' ? 'active' : '' }}">
-                    <a href="/debits/create" class='sidebar-link'>
+                    <a href="/sells/create" class='sidebar-link'>
                         <i class="bi bi-wallet-fill"></i>
                         <span>Transaksi</span>
                     </a>

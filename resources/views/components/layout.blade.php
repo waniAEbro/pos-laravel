@@ -60,7 +60,6 @@
 
         document.querySelectorAll(".saldo").forEach(saldo => saldo.innerHTML = "Saldo : " + convertRupiah(parseInt(
             {{ $saldo }})));
-        document.querySelector(".total_saldo").innerHTML = "Total Saldo : " + convertRupiah(parseInt({{ $total_saldo }}));
     </script>
     {{ $script ?? '' }}
 </body>

@@ -2,8 +2,7 @@
     <x-slot:title>{{ $title }}</x-slot:title>
     <x-slot:breadcrumb>
     </x-slot:breadcrumb>
-    <x-slot:saldo>{{ $saldo->saldo_tunai }}</x-slot:saldo>
-    <x-slot:total_saldo>{{ $saldo->total_saldo }}</x-slot:total_saldo>
+    <x-slot:saldo>{{ $saldo[0]->saldo }}</x-slot:saldo>
     <div class="row">
         <div class="col-lg-6">
             <div class="card">
@@ -36,6 +35,35 @@
                             <h6 class="font-extrabold mb-0">{{ $jumlah_produk }}</h6>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <p>Products Terlaris</p>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama</th>
+                                <th>Kategori</th>
+                                <th>Terjual</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($products as $product)
+                                <tr>
+                                    <td>{{ $product->id }}</td>
+                                    <td>{{ $product->nama }}</td>
+                                    <td>{{ $product->category->nama }}</td>
+                                    <td>{{ $product->terjual }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

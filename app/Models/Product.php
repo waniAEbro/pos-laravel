@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Debit;
+use App\Models\Sell;
 use App\Models\Category;
 use App\Models\Material;
 use Illuminate\Database\Eloquent\Model;
@@ -26,8 +26,8 @@ class Product extends Model
         return $this->belongsToMany(Material::class)->withPivot("jumlah")->withTrashed();
     }
 
-    public function debits()
+    public function sells()
     {
-        return $this->belongsToMany(Debit::class)->withTrashed();
+        return $this->belongsToMany(Sell::class)->withTrashed();
     }
 }

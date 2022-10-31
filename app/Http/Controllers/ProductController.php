@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Saldo;
+use App\Models\Account;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Material;
@@ -21,7 +21,7 @@ class ProductController extends Controller
         return view("products.index", [
             "title" => "Products",
             "products" => Product::get(),
-            "saldo" => Saldo::find(1)
+            "saldo" => Account::latest()->limit(1)->get()
         ]);
     }
 
@@ -36,7 +36,7 @@ class ProductController extends Controller
             "title" => "Products",
             "materials" => Material::get(),
             "categories" => Category::get(),
-            "saldo" => Saldo::find(1)
+            "saldo" => Account::latest()->limit(1)->get()
         ]);
     }
 
@@ -92,7 +92,7 @@ class ProductController extends Controller
             "product" => $product,
             "materials" => Material::get(),
             "categories" => Category::get(),
-            "saldo" => Saldo::find(1)
+            "saldo" => Account::latest()->limit(1)->get()
         ]);
     }
 

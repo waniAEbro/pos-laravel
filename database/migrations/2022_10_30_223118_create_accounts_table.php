@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('debit_product', function (Blueprint $table) {
+        Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("product_id")->constrained("products");
-            $table->integer("harga");
-            $table->integer("jumlah");
-            $table->foreignId("debit_id")->constrained("debits");
+            $table->string('Keterangan');
+            $table->date("tanggal");
+            $table->integer("saldo")->default(0);
+            $table->integer("debit");
+            $table->integer("kredit");
             $table->softDeletes();
             $table->timestamps();
         });
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('debit_products');
+        Schema::dropIfExists('accounts');
     }
 };

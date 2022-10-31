@@ -3,32 +3,7 @@
     <x-slot:breadcrumb>
         <li class="breadcrumb-item">Penjualan</li>
     </x-slot:breadcrumb>
-    <x-slot:saldo>{{ $saldo->saldo_tunai }}</x-slot:saldo>
-    <x-slot:total_saldo>{{ $saldo->total_saldo }}</x-slot:total_saldo>
-
-    <div class="card">
-        <div class="card-header">
-            <p>
-                Detail Saldo
-            </p>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-4">
-                    <h6>Saldo</h6>
-                </div>
-                <div class="col-md-8">
-                    <p id="saldo_tunai">{{ $saldo->saldo_tunai }}</p>
-                </div>
-                <div class="col-md-4">
-                    <h6>Total Saldo <small>(termasuk piutang / kekurangan)</small></h6>
-                </div>
-                <div class="col-md-8">
-                    <p id="total_saldo">{{ $saldo->total_saldo }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <x-slot:saldo>{{ $saldo[0]->saldo }}</x-slot:saldo>
 
     <div class="card">
         <div class="card-header">
@@ -65,9 +40,8 @@
                             <td>{{ $debit->terbayar }}</td>
                             <td>{{ $debit->kekurangan }}</td>
                             <td class="d-flex">
-                                <a href="/debits/{{ $debit->id }}/edit"
-                                    class="btn btn-outline-warning me-2">Edit</a>
-                                <a href="/debits/{{ $debit->id }}" class="btn btn-outline-primary me-2">Detail</a>
+                                <a href="/sells/{{ $debit->id }}/edit" class="btn btn-outline-warning me-2">Edit</a>
+                                <a href="/sells/{{ $debit->id }}" class="btn btn-outline-primary me-2">Detail</a>
                             </td>
                         </tr>
                     @endforeach
