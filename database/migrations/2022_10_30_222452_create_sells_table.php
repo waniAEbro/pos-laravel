@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer("total_barang")->default("0");
             $table->integer("terbayar")->default("0");
             $table->integer("kekurangan")->default("0");
-            $table->integer("laba_kotor")->default(0);
             $table->integer("laba_bersih")->default(0);
             $table->foreignId("reseller_id")->nullable()->constrained("resellers");
             $table->foreignId("user_id")->constrained("users");

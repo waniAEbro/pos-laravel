@@ -149,7 +149,7 @@
                         <td>${product.category.nama}</td>
                         <td>${product.nama}</td>
                         <td>
-                            <input type="number" oninput="updateTable(this)" class="form-control jumlah" value="0" min="0" max="${kecil}" harga=${harga}>
+                            <input type="number" oninput="updateTable(this)" onfocus="this.value = this.value == 0 ? '' : this.value" onblur="this.value = this.value == '' ? 0 : this.value" class="form-control jumlah" value="0" min="0" max="${kecil}" harga=${harga}>
                         </td>
                         <td harga=${harga} class="harga">${convertRupiah(harga)}</td>
                     </tr>
@@ -221,14 +221,14 @@
 
             function submit() {
                 $.ajax({
-                    url: "/debits",
+                    url: "/sells",
                     type: "post",
                     data: {
                         _token: "{{ csrf_token() }}",
                         transaksi: transaksi
                     },
                     success: function(response) {
-                        window.location.href = "/debits/create";
+                        window.location.href = "/sells/create";
                     },
                     error: function(response) {
                         console.log(response);
@@ -245,6 +245,16 @@
                     }
                 } else {
                     submit();
+                }
+            }
+
+            function focus(input) {
+                input.value = ""
+            }
+
+            function blur(input) {
+                if (input.value == "") {
+                    input.value = 0
                 }
             }
         </script>

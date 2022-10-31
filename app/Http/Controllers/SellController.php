@@ -16,7 +16,8 @@ class SellController extends Controller
         return view("sells.index", [
             "title" => "Sells",
             "debits" => Sell::get(),
-            "saldo" => Account::latest()->limit(1)->get()
+            "saldo" => Account::latest()->limit(1)->get(),
+            "laba" => Sell::whereYear("created_at", date("Y"))->whereMonth("created_at", date("m"))->select("laba_bersih", "total_harga")->get()
         ]);
     }
 
@@ -33,11 +34,11 @@ class SellController extends Controller
     public function store(Request $request)
     {
         $sync = [];
-        $laba = 0;
+        $biaya_produksi = 0;
         foreach ($request->transaksi["products"] as $product) {
             $sync[$product["id"]] = ["jumlah" => $product["jumlah"], "harga" => $product["harga"]];
             $produk = Product::find($product["id"]);
-            $laba += ((intval($product["harga"]) / intval($product["jumlah"])) - intval($produk->biaya_produksi)) * intval($product["jumlah"]);
+            $biaya_produksi += intval($produk->biaya_produksi) * intval($product["jumlah"]);
             $produk->update([
                 "stok" => intval($produk->stok) - intval($product["jumlah"]),
                 "terjual" => intval($produk->terjual) + intval($product["jumlah"])
@@ -56,8 +57,7 @@ class SellController extends Controller
             "kekurangan" => $request->transaksi["kekurangan"],
             "reseller_id" => $request->transaksi["reseller_id"],
             "user_id" => $request->transaksi["user_id"],
-            "laba_bersih" => $laba,
-            "laba_kotor" => $request->transaksi["total_harga"]
+            "laba_bersih" => $request->transaksi["total_harga"] - $biaya_produksi
         ]);
 
         $sell->products()->sync($sync);

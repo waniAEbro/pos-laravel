@@ -14,7 +14,11 @@ class AccountController extends Controller
      */
     public function index()
     {
-        //
+        return view("accounts.index", [
+            "title" => "Accounts",
+            "accounts" => Account::get(),
+            "saldo" => Account::latest()->limit(1)->get()
+        ]);
     }
 
     /**
@@ -24,7 +28,10 @@ class AccountController extends Controller
      */
     public function create()
     {
-        //
+        return view("accounts.create", [
+            "title" => "Accounts",
+            "saldo" => Account::latest()->limit(1)->get()
+        ]);
     }
 
     /**
@@ -35,7 +42,16 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $latest = Account::latest()->limit(1)->get();
+
+        Account::create([
+            "nama" => $request->nama,
+            "debit" => $request->debit,
+            "kredit" => $request->kredit,
+            "saldo" => intval($latest[0]->saldo) + intval($request->debit) - intval($request->kredit)
+        ]);
+
+        return redirect("/accounts");
     }
 
     /**

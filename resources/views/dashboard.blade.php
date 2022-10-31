@@ -67,5 +67,76 @@
                 </div>
             </div>
         </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Grafik Laba Kotor Tahun {{ date('Y') }}</h4>
+                </div>
+                <div class="card-body">
+                    <div id="chart"></div>
+                </div>
+            </div>
+        </div>
     </div>
+    <x-slot:script>
+        <script>
+            let array = [];
+            let sell = undefined;
+            const sells = @json($sells);
+            for (let i = 1; i <= 12; i++) {
+                sell = sells.find(sell => sell.month == i);
+                if (sell) {
+                    array.push(parseInt(sell.total_harga))
+                } else {
+                    array.push(0)
+                }
+            }
+            var barOptions = {
+                series: [{
+                    name: "Net Profit",
+                    data: array,
+                }],
+                chart: {
+                    type: "bar",
+                    height: 350,
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: "55%",
+                        endingShape: "rounded",
+                    },
+                },
+                dataLabels: {
+                    enabled: false,
+                },
+                stroke: {
+                    show: true,
+                    width: 2,
+                    colors: ["transparent"],
+                },
+                xaxis: {
+                    categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                },
+                yaxis: {
+                    title: {
+                        text: "Laba Kotor",
+                    },
+                },
+                fill: {
+                    opacity: 1,
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(val) {
+                            return val;
+                        },
+                    },
+                },
+            };
+
+            var bar = new ApexCharts(document.querySelector("#chart"), barOptions);
+            bar.render();
+        </script>
+    </x-slot:script>
 </x-layout>

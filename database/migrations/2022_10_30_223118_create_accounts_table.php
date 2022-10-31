@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->string('Keterangan');
+            $table->string('nama');
             $table->date("tanggal");
             $table->integer("saldo")->default(0);
             $table->integer("debit");

@@ -60,6 +60,22 @@
 
         document.querySelectorAll(".saldo").forEach(saldo => saldo.innerHTML = "Saldo : " + convertRupiah(parseInt(
             {{ $saldo }})));
+
+        document.querySelectorAll("input[type=number]").forEach(input => {
+            input.addEventListener("focus", (element) => {
+                if (element.target.value == 0) {
+                    element.target.value = ""
+                }
+            })
+        })
+
+        document.querySelectorAll("input[type=number]").forEach(input => {
+            input.addEventListener("blur", (element) => {
+                if (element.target.value == "") {
+                    element.target.value = 0
+                }
+            })
+        })
     </script>
     {{ $script ?? '' }}
 </body>
