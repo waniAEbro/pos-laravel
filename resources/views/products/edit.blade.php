@@ -118,7 +118,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="number" min="0" value="0" name="jumlah[]" class="form-control">
+                                    <input type="number" min="0" onfocus="this.value = this.value == 0 ? '' : this.value" onblur="this.value = this.value == '' ? 0 : this.value"  value="0" name="jumlah[]" class="form-control">
                                 </td>
                                 <td>
                                     <button type="button" onclick="tambahRow(this)" class="btn btn-success">Tambah Bahan</button>
@@ -145,7 +145,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="number" min="0" value="0" name="jumlah[]" class="form-control">
+                                    <input type="number" onfocus="this.value = this.value == 0 ? '' : this.value" onblur="this.value = this.value == '' ? 0 : this.value"  min="0" value="0" name="jumlah[]" class="form-control">
                                 </td>
                                 <td>
                                     <button type="button" onclick="tambahRow(this)" class="btn btn-success">Tambah Bahan</button>

@@ -6,8 +6,37 @@
     <x-slot:saldo>{{ $saldo[0]->saldo }}</x-slot:saldo>
 
     <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <label>Bulan</label>
+                </div>
+                <div class="col-lg-8"><input type="month" class="form-control" onchange="cariSells(this)"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <label>Laba Kotor</label>
+                </div>
+                <div class="col-lg-8 form-group">
+                    <input type="text" class="form-control" id="laba_kotor" value="Rp. 0,-" readonly>
+                </div>
+                <div class="col-lg-4">
+                    <label>Laba Bersih</label>
+                </div>
+                <div class="col-lg-8 form-group">
+                    <input type="text" class="form-control" id="laba_bersih" value="Rp. 0,-" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
         <div class="card-header">
-            <p>List Penjualan</p>
         </div>
         <div class="card-body">
             <table class="table table-striped" id="table1">
@@ -40,7 +69,6 @@
                             <td>{{ $debit->terbayar }}</td>
                             <td>{{ $debit->kekurangan }}</td>
                             <td class="d-flex">
-                                <a href="/sells/{{ $debit->id }}/edit" class="btn btn-outline-warning me-2">Edit</a>
                                 <a href="/sells/{{ $debit->id }}" class="btn btn-outline-primary me-2">Detail</a>
                             </td>
                         </tr>
@@ -51,6 +79,21 @@
     </div>
     <x-slot:script>
         <script>
+            function cariSells(element) {
+                window.location.href = '/sells?month=' + element.value.split("-")[1] + '&year=' + element.value.split('-')[0];
+            }
+
+            const sells = @json($debits);
+            let laba_kotor = laba_bersih = 0;
+
+            sells.forEach(sell => {
+                laba_kotor += sell.total_harga;
+                laba_bersih += sell.laba_bersih;
+            });
+
+            document.getElementById('laba_kotor').value = convertRupiah(laba_kotor);
+            document.getElementById('laba_bersih').value = convertRupiah(laba_bersih);
+
             let tr = document.querySelectorAll('tbody tr');
 
             tr.forEach(tr => {

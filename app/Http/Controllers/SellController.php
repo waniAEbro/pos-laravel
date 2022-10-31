@@ -11,13 +11,19 @@ use App\Http\Controllers\Controller;
 
 class SellController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $year = date('Y');
+        $month = date('m');
+        if ($request->month && $request->year) {
+            $month = $request->month;
+            $year = $request->year;
+        }
         return view("sells.index", [
             "title" => "Sells",
-            "debits" => Sell::get(),
+            "debits" => Sell::whereYear("created_at", $year)->whereMonth("created_at", $month)->get(),
             "saldo" => Account::latest()->limit(1)->get(),
-            "laba" => Sell::whereYear("created_at", date("Y"))->whereMonth("created_at", date("m"))->select("laba_bersih", "total_harga")->get()
+            "laba" => Sell::whereYear("created_at", $year)->whereMonth("created_at", $month)->select("laba_bersih", "total_harga")->get()
         ]);
     }
 
@@ -69,7 +75,7 @@ class SellController extends Controller
     {
         return view("sells.show", [
             "title" => "Sells",
-            "sebit" => $sell,
+            "debit" => $sell,
             "saldo" => Account::latest()->limit(1)->get()
         ]);
     }
