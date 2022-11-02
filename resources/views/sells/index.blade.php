@@ -79,6 +79,21 @@
     </div>
     <x-slot:script>
         <script>
+            $("table").DataTable({
+                dom: 'Bfrtip',
+                buttons: [{
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                    }
+                }, {
+                    extend: 'pdfHtml5',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                    }
+                }]
+            });
+
             function cariSells(element) {
                 window.location.href = '/sells?month=' + element.value.split("-")[1] + '&year=' + element.value.split('-')[0];
             }

@@ -96,6 +96,15 @@
     </div>
     <x-slot:script>
         <script>
+            $("table").DataTable({
+                dom: 'Bfrtip',
+                buttons: [{
+                    extend: 'excelHtml5'
+                }, {
+                    extend: 'pdfHtml5'
+                }]
+            });
+
             let tr = document.querySelectorAll('tbody tr');
 
             tr.forEach(tr => {

@@ -81,4 +81,16 @@
             </table>
         </div>
     </div>
+    <x-slot:script>
+        <script>
+            $("table").DataTable({
+                dom: 'Bfrtip',
+                buttons: [{
+                    extend: 'excelHtml5'
+                }, {
+                    extend: 'pdfHtml5'
+                }]
+            });
+        </script>
+    </x-slot:script>
 </x-layout>

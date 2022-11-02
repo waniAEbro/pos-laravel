@@ -11,10 +11,9 @@
     <link rel="stylesheet" href="/assets/css/main/app-dark.css">
     <link rel="shortcut icon" href="/assets/images/logo/favicon.svg" type="image/x-icon">
     <link rel="shortcut icon" href="/assets/images/logo/favicon.png" type="image/png">
-
     <link rel="stylesheet" href="/assets/css/shared/iconly.css">
-    <link rel="stylesheet" href="/assets/extensions/simple-datatables/style.css" />
-    <link rel="stylesheet" href="/assets/css/pages/simple-datatables.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-html5-2.2.3/datatables.min.css" />
 </head>
 
 <body>
@@ -42,13 +41,16 @@
     <!-- Need: Apexcharts -->
     <script src="/assets/extensions/apexcharts/apexcharts.min.js"></script>
     <script src="/assets/js/pages/dashboard.js"></script>
-    <script src="/assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
-    <script src="/assets/js/pages/simple-datatables.js"></script>
     <script src="/assets/extensions/choices.js/public/assets/scripts/choices.js"></script>
     <script src="/assets/js/pages/form-element-select.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js"
         integrity="sha512-CX7sDOp7UTAq+i1FYIlf9Uo27x4os+kGeoT7rgwvY+4dmjqV0IuE/Bl5hVsjnQPQiTOhAX1O2r2j5bjsFBvv/A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-html5-2.2.3/datatables.min.js"></script>
     <script>
         function convertRupiah(angka) {
             let rupiah = '';

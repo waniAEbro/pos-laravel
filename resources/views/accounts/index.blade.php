@@ -39,6 +39,15 @@
                 tr.children[2].innerHTML = convertRupiah(tr.children[2].innerHTML);
                 tr.children[3].innerHTML = convertRupiah(tr.children[3].innerHTML);
             });
+
+            $("table").DataTable({
+                dom: 'Bfrtip',
+                buttons: [{
+                    extend: 'excelHtml5'
+                }, {
+                    extend: 'pdfHtml5'
+                }]
+            });
         </script>
     </x-slot:script>
 </x-layout>
