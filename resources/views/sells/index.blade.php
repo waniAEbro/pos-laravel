@@ -58,7 +58,8 @@
                     @foreach ($debits as $debit)
                         <tr>
                             <td>{{ $debit->created_at->format('j F Y') }}</td>
-                            <td>{{ $debit->reseller_id ? $debit->reseller->nama : $debit->nama_pelanggan }}</td>
+                            <td>{{ $debit->reseller_id ? $debit->reseller->nama . ' (reseller)' : $debit->nama_pelanggan . ' (biasa)' }}
+                            </td>
                             <td>{{ $debit->user->name }}</td>
                             <td>
                                 @foreach ($debit->products as $index => $product)
