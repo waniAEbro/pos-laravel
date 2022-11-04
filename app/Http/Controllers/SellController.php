@@ -63,7 +63,10 @@ class SellController extends Controller
             "kekurangan" => $request->transaksi["kekurangan"],
             "reseller_id" => $request->transaksi["reseller_id"],
             "user_id" => $request->transaksi["user_id"],
-            "laba_bersih" => $request->transaksi["total_harga"] - $biaya_produksi
+            "laba_bersih" => $request->transaksi["total_harga"] - $biaya_produksi,
+            "nama_pelanggan" => $request->transaksi["nama_pelanggan"],
+            "alamat" => $request->transaksi["alamat"],
+            "nomor" => $request->transaksi["nomor"]
         ]);
 
         $sell->products()->sync($sync);
@@ -82,12 +85,21 @@ class SellController extends Controller
 
     public function edit(Sell $sell)
     {
-        //
+        return view("sells.edit", [
+            "title" => "Sells",
+            "sell" => $sell,
+            "saldo" => Account::latest()->limit(1)->get()
+        ]);
     }
 
     public function update(Request $request, Sell $sell)
     {
-        //
+        $sell->update([
+            "terbayar" => intval($sell->terbayar) + intval($request->terbayar),
+            "kekurangan" => intval($sell->kekurangan) - intval($request->terbayar)
+        ]);
+
+        return redirect("/sells");
     }
 
     public function destroy(Sell $sell)

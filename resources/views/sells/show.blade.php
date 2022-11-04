@@ -6,6 +6,9 @@
     <x-slot:saldo>{{ $saldo[0]->saldo }}</x-slot:saldo>
 
     <div class="card">
+        <div class="card-header">
+            <h5>Data Diri {{ $debit->reseller ? 'Reseller' : 'Pelanggan Biasa' }}</h5>
+        </div>
         <div class="card-body">
             <div class="form-body">
                 <div class="row">
@@ -14,7 +17,21 @@
                     </div>
                     <div class="col-md-8 form-group">
                         <input name="reseller" id="reseller" class="form-control"
-                            value="{{ $debit->reseller ? $debit->reseller->nama : 'Pelanggan Biasa' }}" disabled>
+                            value="{{ $debit->reseller ? $debit->reseller->nama : $debit->nama_pelanggan }}" disabled>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="reseller">Alamat</label>
+                    </div>
+                    <div class="col-md-8 form-group">
+                        <input name="alamt" id="alamt" class="form-control"
+                            value="{{ $debit->reseller ? $debit->reseller->alamat : $debit->alamat }}" disabled>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="reseller">Nomor Telepon</label>
+                    </div>
+                    <div class="col-md-8 form-group">
+                        <input name="nomor" id="nomor" class="form-control"
+                            value="{{ $debit->reseller ? $debit->reseller->nomor : $debit->nomor }}" disabled>
                     </div>
                 </div>
             </div>

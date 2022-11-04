@@ -110,6 +110,61 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade text-left" id="danger" tabindex="-1" aria-labelledby="myModalLabel120"
+        style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title white" id="myModalLabel120">
+                        Data diri pelanggan biasa
+                    </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-x">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label>Nama Pelanggan</label>
+                        </div>
+                        <div class="col-lg-8 form-group">
+                            <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan">
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Alamat</label>
+                        </div>
+                        <div class="col-lg-8 form-group">
+                            <textarea class="form-control" id="alamat" name="alamat"></textarea>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Nomor Telepon</label>
+                        </div>
+                        <div class="col-lg-8 form-group">
+                            <input type="text" class="form-control" id="nomor" name="nomor">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                        <i class="bx bx-x d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Close</span>
+                    </button>
+                    <button type="button" onclick="submitUtang()" class="btn btn-danger ml-1"
+                        data-bs-dismiss="modal">
+                        <i class="bx bx-check d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Accept</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <button onclick="submitForm()" class="btn btn-primary">Simpan Transaksi</button>
     <x-slot:script>
         <script>
@@ -122,6 +177,11 @@
             transaksi.reseller_id = null;
             transaksi.products = [];
             transaksi.user_id = {{ auth()->user()->id }};
+            transaksi.nama_pelanggan = null;
+            transaksi.alamat = null;
+            transaksi.nomor = null;
+            transaksi.terbayar = 0;
+            transaksi.kekurangan = 0;
 
             $("#reseller").on("change", () => {
                 reseller = $("#reseller").val();
@@ -201,7 +261,14 @@
                 harga = document.getElementById("total_harga").getAttribute("harga");
                 total = parseInt(element.value) - parseInt(harga);
                 if (document.querySelectorAll("tbody tr").length > 0) {
-                    if (total < 0) {
+                    if (isNaN(total)) {
+                        kembalian.setAttribute("kembalian", 0);
+                        kembalian.value = convertRupiah(0);
+                        kekurangan.setAttribute("kekurangan", 0);
+                        kekurangan.value = convertRupiah(0);
+                        transaksi.kekurangan = 0;
+                        transaksi.terbayar = 0;
+                    } else if (total < 0) {
                         kembalian.setAttribute("kembalian", 0);
                         kembalian.value = convertRupiah(0);
                         kekurangan.setAttribute("kekurangan", 0);
@@ -212,14 +279,14 @@
                         kekurangan.setAttribute("kekurangan", 0);
                         kekurangan.value = convertRupiah(0);
                         transaksi.kekurangan = 0;
-                        kembalian.setAttribute("kembalian", 0);
+                        kembalian.setAttribute("kembalian", total);
                         kembalian.value = convertRupiah(total);
-                        transaksi.terbayar = parseInt(parseInt(harga));
+                        transaksi.terbayar = parseInt(harga);
                     }
                 }
             }
 
-            function submit() {
+            function Submit() {
                 $.ajax({
                     url: "/sells",
                     type: "post",
@@ -237,15 +304,25 @@
             }
 
             function submitForm() {
-                if (transaksi.kekurangan > 0 && transaksi.reseller_id == null) {
-                    window.alert("Uang yang diayarkan pelanggan tidak cukup");
-                } else if (transaksi.kekurangan > 0 && transaksi.reseller_id) {
+                if (transaksi.kekurangan >= 0 && transaksi.reseller_id == null && kembalian.getAttribute(
+                        "kembalian") == 0) {
+                    $("#danger").modal("show");
+                } else if (transaksi.kekurangan >= 0 && transaksi.reseller_id && kembalian.getAttribute(
+                        "kembalian") == 0) {
                     if (confirm("Uang yang diayarkan pelanggan tidak cukup, apakah anda yakin ingin melanjutkan transaksi?")) {
-                        submit();
+                        Submit();
                     }
                 } else {
-                    submit();
+                    Submit();
                 }
+            }
+
+            function submitUtang() {
+                transaksi.nama_pelanggan = $("#nama_pelanggan").val();
+                transaksi.alamat = $("#alamat").val();
+                transaksi.nomor = $("#nomor").val();
+
+                Submit();
             }
 
             function focus(input) {

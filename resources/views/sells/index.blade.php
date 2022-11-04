@@ -37,6 +37,7 @@
 
     <div class="card">
         <div class="card-header">
+            <h4>List Data Penjualan</h4>
         </div>
         <div class="card-body">
             <table class="table table-striped" id="table1">
@@ -57,7 +58,7 @@
                     @foreach ($debits as $debit)
                         <tr>
                             <td>{{ $debit->created_at->format('j F Y') }}</td>
-                            <td>{{ $debit->reseller_id ? $debit->reseller->nama : 'Pelanggan Biasa' }}</td>
+                            <td>{{ $debit->reseller_id ? $debit->reseller->nama : $debit->nama_pelanggan }}</td>
                             <td>{{ $debit->user->name }}</td>
                             <td>
                                 @foreach ($debit->products as $index => $product)
@@ -70,6 +71,11 @@
                             <td>{{ $debit->kekurangan }}</td>
                             <td class="d-flex">
                                 <a href="/sells/{{ $debit->id }}" class="btn btn-outline-primary me-2">Detail</a>
+                                @if (intval($debit->kekurangan) > 0)
+                                    <a href="/sells/{{ $debit->id }}/edit"
+                                        class="btn btn-outline-warning me-2">Bayar
+                                        Kekurangan</a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
