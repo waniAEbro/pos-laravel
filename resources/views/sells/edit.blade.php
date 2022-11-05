@@ -74,7 +74,7 @@
                 let kekurangan = parseInt(document.getElementById("kekurangan").getAttribute("kekurangan"));
 
                 if (terbayar < kekurangan) {
-                    let warning = warning("Nominal yang dibayarkan masih kurang dari hutang");
+                    let warning = confirm("Nominal yang dibayarkan masih kurang dari hutang, anda ingin melanjutkan ?");
                     if (warning) {
                         document.querySelector("#update").submit();
                     }
