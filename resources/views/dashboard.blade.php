@@ -43,8 +43,8 @@
                 <div class="card-header">
                     <p>Products Terlaris</p>
                 </div>
-                <div class="card-body">
-                    <table class="table table-striped table-responsive-sm">
+                <div class="card-body table-responsive">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>ID</th>

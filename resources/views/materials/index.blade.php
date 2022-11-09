@@ -11,7 +11,7 @@
             <a href="/materials/create" class="btn btn-primary">Create Material</a>
         </div>
         <div class="card-body">
-            <table class="table table-striped" id="table1">
+            <table class="table table-striped" id="table1" width="100%">
                 <thead>
                     <tr>
                         <th>Tanggal Stok</th>
@@ -90,7 +90,6 @@
         <script>
             $("table").DataTable({
                 scrollX: true,
-                autoWidth: false,
                 dom: 'Bfrtip',
                 buttons: [{
                     extend: 'excelHtml5'

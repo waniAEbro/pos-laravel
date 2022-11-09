@@ -40,7 +40,7 @@
             <h4>List Data Penjualan</h4>
         </div>
         <div class="card-body">
-            <table class="table table-striped" id="table1">
+            <table class="table table-striped" id="table1" width="100%">
                 <thead>
                     <tr>
                         <th>Tanggal Transaksi</th>
@@ -88,7 +88,6 @@
         <script>
             $("table").DataTable({
                 scrollX: true,
-                autoWidth: false,
                 dom: 'Bfrtip',
                 buttons: [{
                     extend: 'excelHtml5',

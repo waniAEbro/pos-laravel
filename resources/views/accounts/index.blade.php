@@ -10,7 +10,7 @@
             <a href="/accounts/create" class="btn btn-primary">Create Account</a>
         </div>
         <div class="card-body">
-            <table class="table table-striped" id="table1">
+            <table class="table table-striped" id="table1" width="100%">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -46,7 +46,6 @@
 
             $("table").DataTable({
                 scrollX: true,
-                autoWidth: false,
                 dom: 'Bfrtip',
                 buttons: [{
                     extend: 'excelHtml5'

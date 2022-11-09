@@ -43,7 +43,7 @@
         <div class="card-header">
             <p>Transaksi</p>
         </div>
-        <div class="card-body">
+        <div class="card-body table-responsive">
             <table class="table table-striped" id="table2">
                 <thead>
                     <tr>
@@ -306,13 +306,15 @@
             function submitForm() {
                 if (transaksi.kekurangan >= 0 && transaksi.reseller_id == null && kembalian.getAttribute(
                         "kembalian") == 0) {
-                    if (uang pelanggan biasa masih kurang, apabila anda ingin melanjutkan,
-                        silakan isi data pelanggan terlebih dahulu) {
+                    if (confirm(
+                            "uang pelanggan biasa masih kurang, apabila anda ingin melanjutkan,silakan isi data pelanggan terlebih dahulu"
+                        )) {
                         $("#danger").modal("show");
                     }
                 } else if (transaksi.kekurangan >= 0 && transaksi.reseller_id && kembalian.getAttribute(
                         "kembalian") == 0) {
-                    if (confirm("Uang yang diayarkan pelanggan tidak cukup, apakah anda yakin ingin melanjutkan transaksi?")) {
+                    if (confirm(
+                            "Uang yang diayarkan pelanggan tidak cukup, apakah anda yakin ingin melanjutkan transaksi?")) {
                         Submit();
                     }
                 } else {
