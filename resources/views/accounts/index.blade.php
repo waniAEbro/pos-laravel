@@ -13,6 +13,8 @@
             <table class="table table-striped" id="table1">
                 <thead>
                     <tr>
+                        <th>#</th>
+                        <th>Tanggal</th>
                         <th>Nama Transaksi</th>
                         <th>Debit</th>
                         <th>Kredit</th>
@@ -20,8 +22,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($accounts as $account)
+                    @foreach ($accounts as $nomor => $account)
                         <tr>
+                            <td>{{ $nomor + 1 }}</td>
+                            <td>{{ $account->created_at->format('d F Y') }}</td>
                             <td>{{ $account->nama }}</td>
                             <td>{{ $account->debit }}</td>
                             <td>{{ $account->kredit }}</td>
@@ -35,9 +39,9 @@
     <x-slot:script>
         <script>
             document.querySelectorAll("tbody tr").forEach(tr => {
-                tr.children[1].innerHTML = convertRupiah(tr.children[1].innerHTML);
-                tr.children[2].innerHTML = convertRupiah(tr.children[2].innerHTML);
                 tr.children[3].innerHTML = convertRupiah(tr.children[3].innerHTML);
+                tr.children[4].innerHTML = convertRupiah(tr.children[4].innerHTML);
+                tr.children[5].innerHTML = convertRupiah(tr.children[5].innerHTML);
             });
 
             $("table").DataTable({
