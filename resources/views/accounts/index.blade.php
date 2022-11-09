@@ -45,6 +45,8 @@
             });
 
             $("table").DataTable({
+                scrollX: true,
+                autoWidth: false,
                 dom: 'Bfrtip',
                 buttons: [{
                     extend: 'excelHtml5'

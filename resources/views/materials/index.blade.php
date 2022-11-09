@@ -89,6 +89,8 @@
     <x-slot:script>
         <script>
             $("table").DataTable({
+                scrollX: true,
+                autoWidth: false,
                 dom: 'Bfrtip',
                 buttons: [{
                     extend: 'excelHtml5'
