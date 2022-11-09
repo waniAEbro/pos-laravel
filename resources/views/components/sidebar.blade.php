@@ -85,14 +85,14 @@
 
                 <li class="sidebar-item {{ $slot == 'Sells' ? 'active' : '' }}">
                     <a href="/sells" class='sidebar-link'>
-                        <i class="bi bi-currency-exchange"></i>
+                        <i class="bi bi-wallet"></i>
                         <span>Penjualan</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item {{ $slot == 'Transaction' ? 'active' : '' }}">
                     <a href="/sells/create" class='sidebar-link'>
-                        <i class="bi bi-wallet-fill"></i>
+                        <i class="bi bi-cash-coin"></i>
                         <span>Transaksi</span>
                     </a>
                 </li>
@@ -101,7 +101,7 @@
 
                 <li class="sidebar-item {{ $slot == 'Accounts' ? 'active' : '' }}">
                     <a href="/accounts" class='sidebar-link'>
-                        <i class="bi bi-reply-all-fill"></i>
+                        <i class="bi bi-journal-text"></i>
                         <span>Laporan Keuangan</span>
                     </a>
                 </li>

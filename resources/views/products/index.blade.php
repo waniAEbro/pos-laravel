@@ -10,7 +10,7 @@
             <p>Products List</p>
             <a href="/products/create" class="btn btn-primary">Create Product</a>
         </div>
-        <div class="card-body">
+        <div class="card-body table-responsive">
             <table class="table table-striped" id="table1">
                 <thead>
                     <tr>

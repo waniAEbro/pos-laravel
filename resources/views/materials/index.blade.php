@@ -10,7 +10,7 @@
             <p>Materials List</p>
             <a href="/materials/create" class="btn btn-primary">Create Material</a>
         </div>
-        <div class="card-body">
+        <div class="card-body table-responsive">
             <table class="table table-striped" id="table1">
                 <thead>
                     <tr>

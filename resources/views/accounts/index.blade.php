@@ -9,7 +9,7 @@
             <p>Accounts List</p>
             <a href="/accounts/create" class="btn btn-primary">Create Account</a>
         </div>
-        <div class="card-body">
+        <div class="card-body table-responsive">
             <table class="table table-striped" id="table1">
                 <thead>
                     <tr>

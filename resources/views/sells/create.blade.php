@@ -10,7 +10,7 @@
             <div class="form-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="reseller">Reseller</label>
+                        <label for="reseller">Pembeli</label>
                     </div>
                     <div class="col-md-8 form-group">
                         <select name="reseller" id="reseller" class="form-select">
@@ -43,7 +43,7 @@
         <div class="card-header">
             <p>Transaksi</p>
         </div>
-        <div class="card-body">
+        <div class="card-body ">
             <table class="table table-striped" id="table2">
                 <thead>
                     <tr>

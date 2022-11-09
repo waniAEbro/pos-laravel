@@ -10,7 +10,7 @@
             <p>Resellers List</p>
             <a href="/resellers/create" class="btn btn-primary">Create Reseller</a>
         </div>
-        <div class="card-body">
+        <div class="card-body table-responsive">
             <table class="table table-striped" id="table1">
                 <thead>
                     <tr>

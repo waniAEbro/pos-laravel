@@ -39,8 +39,8 @@
         <div class="card-header">
             <h4>List Data Penjualan</h4>
         </div>
-        <div class="card-body">
-            <table class="table table-striped" id="table1">
+        <div class="card-body table-responsive">
+            <table class="table-responsive table-striped" id="table1">
                 <thead>
                     <tr>
                         <th>Tanggal Transaksi</th>
